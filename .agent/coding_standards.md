@@ -32,3 +32,8 @@
 - **Known Pitfalls:**
   - `Get Pages site failed`: Fix via Settings > Pages > Source > GitHub Actions.
   - TypeScript build errors will break the Actions pipeline — always run `npm run build` locally first.
++ - **Unit Testing Standards:**
++   1. Every core feature or logic utility MUST have a corresponding `.test.ts` file in `src/`.
++   2. Use `vitest` for all unit and integration tests.
++   3. Tests must be executed before every push to ensure no regressions.
++   4. Naming convention: `<filename>.test.ts`.

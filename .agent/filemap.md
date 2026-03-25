@@ -9,6 +9,7 @@
 ## 📂 Source (`/src/`)
 - **`main.ts`** — App entry point; mounts the UI and wires up event listeners.
 - **`estimator.ts`** — Core estimation logic; computes USD cost breakdown from a user idea.
+- **`estimator.test.ts`** — Unit tests for `estimator.ts`.
 - **`style.css`** — Global design system styles (variables, layout, glassmorphism cards).
 
 ## 📂 Public (`/public/`)
@@ -20,11 +21,13 @@
 - **`filemap.md`** — This file; registry of all project files and purposes.
 - **`workflows/feature.md`** — `/feature` slash command workflow.
 - **`workflows/pipeline.md`** — `/pipeline` slash command workflow.
+- **`workflows/test.md`** — `/test` slash command workflow for unit testing.
 
 ## 📂 Documentation (`/docs/`)
 - **`pipeline_plan.md`** — Plan doc for the initial deployment pipeline setup.
 - **`pipeline_ascii.md`** — ASCII flow for the deployment and app data flow.
 - **`ascii_flow.md`** — Comprehensive architecture and runtime logic flow for the Estimate app.
+- **`testing_ascii.md`** — ASCII flow for the testing process.
 
 ## 📂 CI/CD (`/.github/workflows/`)
 - **`deploy.yml`** — GitHub Actions pipeline: Node 20 → npm ci → npm run build → GitHub Pages deploy from `dist/`.

@@ -17,6 +17,7 @@
 
 ## Workflows & Pipelines
 - Automated CI/CD pipeline: `.github/workflows/deploy.yml` (to be created via `/pipeline`)
+- Unit Testing Agent: `/test` (via `.agent/workflows/test.md`)
 - Custom AI workflows: `.agent/workflows/`
 
 ## Coding Guidelines
