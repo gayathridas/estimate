@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estimate — Turn Your Idea Into a USD Cost</title>
+    <meta name="description" content="Enter your project idea and instantly receive a detailed USD cost estimate broken down by category." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <header class="navbar">
+      <div class="nav-inner">
+        <div class="logo">💡 <span>Estimate</span></div>
+        <p class="nav-tagline">Turn your idea into a USD cost</p>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- Input Section -->
+      <section class="input-section" aria-label="Idea input">
+        <h1 class="hero-title">What's your <span class="gradient-text">idea?</span></h1>
+        <p class="hero-subtitle">Describe your project or product idea and we'll estimate the cost to build it.</p>
+
+        <form id="estimateForm" class="estimate-form" novalidate>
+          <div class="form-group">
+            <label for="ideaInput" class="form-label">Your Idea</label>
+            <textarea
+              id="ideaInput"
+              class="idea-textarea"
+              placeholder="e.g. A mobile app that helps users track their daily water intake with reminders and analytics..."
+              rows="4"
+              aria-required="true"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="complexitySelect" class="form-label">Complexity Level</label>
+            <select id="complexitySelect" class="idea-select">
+              <option value="simple">Simple — Basic UI, core features only</option>
+              <option value="medium" selected>Medium — Multiple features, integrations</option>
+              <option value="complex">Complex — Advanced AI/ML, large scale</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-estimate" id="estimateBtn">
+            Generate Estimate →
+          </button>
+        </form>
+      </section>
+
+      <!-- Results Section -->
+      <section id="resultsSection" class="results-section hidden" aria-label="Estimate results" aria-live="polite">
+        <div class="results-header">
+          <h2 class="results-title">Your Estimate</h2>
+          <div id="totalCost" class="total-cost"></div>
+        </div>
+        <div id="breakdownCards" class="breakdown-cards"></div>
+        <p class="disclaimer">* Estimates are indicative based on average market rates. Actual costs may vary.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 Estimate App. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
