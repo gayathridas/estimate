@@ -24,6 +24,12 @@
 2. Prioritize clean, modern, premium UI design.
 3. Commit often with descriptive messages.
 
+## 📝 Mandatory Documentation Rule (Step 0)
+For every new feature, fix, or deployment, the agent MUST first:
+1. Create/Update `docs/ascii_flow.md` — showing the architecture and logic flow.
+2. Create/Update a Plan Doc — listing specific file and line changes.
+3. Update `.agent/filemap.md` — registering the new documents.
+
 ## ⚠️ Known Issues & Lessons Learned
 - **GitHub Pages Source Setting:** After the first push, go to **GitHub > Settings > Pages > Source = "GitHub Actions"**.
 - **Git Identity Warning:** Resolve with `git config --global user.name` and `git config --global user.email`.
