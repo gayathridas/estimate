@@ -3,8 +3,8 @@
 ## Project Overview
 - **App Name:** Estimate
 - **Goal:** A single-page TypeScript application where users enter an idea and receive a cost estimate in USD for executing it.
-- **Current Status:** 🚀 Initial build in progress.
-- **Remote Repository:** TBD (set up via `/pipeline`).
+- **Current Status:** ✅ Live — Deployed to GitHub Pages.
+- **Remote Repository:** `https://github.com/gayathridas/estimate.git`
 
 ## File Map Reference
 - **[File Map](.agent/filemap.md):** View the file map for a structural overview of the codebase.
