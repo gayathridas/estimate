@@ -24,6 +24,7 @@
 ## 📂 Documentation (`/docs/`)
 - **`pipeline_plan.md`** — Plan doc for the initial deployment pipeline setup.
 - **`pipeline_ascii.md`** — ASCII flow for the deployment and app data flow.
+- **`ascii_flow.md`** — Comprehensive architecture and runtime logic flow for the Estimate app.
 
 ## 📂 CI/CD (`/.github/workflows/`)
 - **`deploy.yml`** — GitHub Actions pipeline: Node 20 → npm ci → npm run build → GitHub Pages deploy from `dist/`.
