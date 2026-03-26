@@ -1,4 +1,4 @@
-name: Deploy Estimate App to GitHub Pages
+name: Deploy Estimate App (AWS & Secure SDLC)
 
 on:
   push:
@@ -7,18 +7,36 @@ on:
 
 permissions:
   contents: read
-  pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  security-events: write # Required for CodeQL
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  security-scan:
+    name: 🛡️ Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Dependency Scan (npm audit)
+        run: npm audit --audit-level=high
+
+  build:
+    name: 🏗️ Build
+    needs: security-scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,14 +54,36 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
         with:
+          name: dist
           path: "./dist"
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  deploy-aws:
+    name: 🚀 Deploy to AWS
+    needs: build
+    runs-on: ubuntu-latest
+    # environment: production # Uncomment if you have a GitHub Environment
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: "./dist"
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
+
+      - name: Invalidate CloudFront Cache
+        if: vars.CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+

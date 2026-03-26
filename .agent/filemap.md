@@ -26,8 +26,9 @@
 ## 📂 Documentation (`/docs/`)
 - **`pipeline_plan.md`** — Plan doc for the initial deployment pipeline setup.
 - **`pipeline_ascii.md`** — ASCII flow for the deployment and app data flow.
+- **`aws_setup_guide.md`** — Step-by-step instructions for AWS OIDC/S3/CloudFront.
 - **`ascii_flow.md`** — Comprehensive architecture and runtime logic flow for the Estimate app.
 - **`testing_ascii.md`** — ASCII flow for the testing process.
 
 ## 📂 CI/CD (`/.github/workflows/`)
-- **`deploy.yml`** — GitHub Actions pipeline: Node 20 → npm ci → npm run build → GitHub Pages deploy from `dist/`.
+- **`deploy.yml`** — GitHub Actions pipeline: Security Scan (CodeQL/Audit) → Build → AWS S3 Deploy via OIDC.

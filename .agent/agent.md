@@ -13,12 +13,13 @@
 - **Language:** TypeScript (strict mode)
 - **Bundler:** Vite (vanilla-ts template)
 - **Styling:** Custom CSS with glassmorphism, CSS variables, Flexbox/Grid
-- **Deployment:** GitHub Actions → GitHub Pages (branch: `main`)
+- **Deployment:** AWS S3 + CloudFront (Migration in progress; GitHub Pages as fallback)
+- **Security:** CodeQL SAST, npm audit, AWS OIDC (Secure SDLC)
 
 ## Workflows & Pipelines
-- Automated CI/CD pipeline: `.github/workflows/deploy.yml` (to be created via `/pipeline`)
+- Automated CI/CD pipeline: `.github/workflows/deploy.yml` (AWS & Secure SDLC)
 - Unit Testing Agent: `/test` (via `.agent/workflows/test.md`)
-- Custom AI workflows: `.agent/workflows/`
+- AWS Setup Guide: `docs/aws_setup_guide.md`
 
 ## Coding Guidelines
 1. Use strict TypeScript — define interfaces for all data shapes.
