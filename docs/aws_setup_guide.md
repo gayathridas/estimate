@@ -31,23 +31,31 @@ Instead of using long-lived Access Keys, we use a temporary role.
 7. Click **Next**.
 8. **Permissions:** Create a policy that allows `s3:Sync` and `s3:PutObject` to your bucket, and `cloudfront:CreateInvalidation`.
    - *Example Policy:*
-   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Action": ["s3:PutObject", "s3:ListBucket", "s3:DeleteObject"],
-         "Resource": ["arn:aws:s3:::YOUR_BUCKET_NAME", "arn:aws:s3:::YOUR_BUCKET_NAME/*"]
-       },
-       {
-         "Effect": "Allow",
-         "Action": ["cloudfront:CreateInvalidation"],
-         "Resource": ["*"]
-       }
-     ]
-   }
-   ```
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "S3ObjectLevel",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:DeleteObject", "s3:GetObject"],
+          "Resource": ["arn:aws:s3:::YOUR_BUCKET_NAME/*"]
+        },
+        {
+          "Sid": "S3BucketLevel",
+          "Effect": "Allow",
+          "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+          "Resource": ["arn:aws:s3:::YOUR_BUCKET_NAME"]
+        },
+        {
+          "Sid": "CloudFrontInvalidation",
+          "Effect": "Allow",
+          "Action": ["cloudfront:CreateInvalidation"],
+          "Resource": ["*"]
+        }
+      ]
+    }
+    ```
 9. **Role Name:** `GitHubActionsEstimateDeploy`.
 
 ## 4. GitHub Configuration
@@ -106,3 +114,13 @@ Now that everything is ready:
 2. Commit and push: `git add .`, `git commit -m "chore: trigger aws deploy"`, `git push origin main`.
 3. Go to your **GitHub Repo** > **Actions** tab.
 4. Watch as the **🛡️ Security Scan** runs first, followed by the **🏗️ Build**, and finally the **🚀 Deploy to AWS**.
+
+## 7. Find Your App's Public URL
+Once the deployment is finished:
+1. Go to the **CloudFront Console**.
+2. Click on the **Distribution ID** you just created.
+3. On the **General** tab, look for **Distribution domain name** (e.g., `d123456abcdef.cloudfront.net`).
+4. **Copy and paste it into your browser.** This is your app's live URL!
+
+> [!TIP]
+> **Custom Domains:** If you have your own domain name (e.g., `myestimate.com`), you can later link it to this CloudFront distribution using **Route 53**.
