@@ -29,6 +29,8 @@
 - **`aws_setup_guide.md`** — Step-by-step instructions for AWS OIDC/S3/CloudFront.
 - **`ascii_flow.md`** — Comprehensive architecture and runtime logic flow for the Estimate app.
 - **`testing_ascii.md`** — ASCII flow for the testing process.
+- **`cost_details_plan.md`** — Plan doc for the Resource/Hosting/AI capture feature.
+- **`cost_details_ascii.md`** — ASCII flow for the updated UI with cost details.
 
 ## 📂 CI/CD (`/.github/workflows/`)
 - **`deploy.yml`** — GitHub Actions pipeline: Security Scan (CodeQL/Audit) → Build → AWS S3 Deploy via OIDC.
